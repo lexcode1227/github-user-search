@@ -1,42 +1,41 @@
-import { Container } from '@mui/material'
-import './App.css'
-import Searcher from './components/Searcher';
 import { useEffect, useState } from 'react';
+import './App.css'
+import { Container, Typography } from '@mui/material'
+import Searcher from './components/Searcher';
 import { getGitHubUsers } from "./services/users"
-import UserCard from './containers/userCard';
+import UserCard from './containers/UserCard';
 
 const containerStyles = {
-  background: "whitesmoke",
-  marginTop: '30px',
-  width: '80vw',
-  height: "500px",
   borderRadius: "16px",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  width: "730px",
+  gap: "20px"
 };
 
 const App = () => {
-  const [inputUser, setInputUser] = useState("octocat")
+  const [inputUser, setInputUser] = useState("lexcode1227")
   const [userState, setUserState] = useState(inputUser)
   const [ notFound, setNotFound] = useState(false)
 
   const gettingUser = async (user)=> {
     const userResponse = await getGitHubUsers(user)
-    
     if (userState === "octocat") {
-      localStorage.setItem("octocat", userResponse)
+      localStorage.setItem("octocat", JSON.stringify(userResponse))
     }
-    if(userResponse.message === "Not Found"){
-      const { octocat } = localStorage
-      setInputUser(octocat)
+    if(userResponse.message === 'Not Found') {
+      // setInputUser("octocat")
+      const storedUser = localStorage.getItem('octocat');
+      const userObject = JSON.parse(storedUser);
+      setUserState(userObject);
       setNotFound(true)
     } else {
       setUserState(userResponse)
+      setNotFound(false)
     }    
   }
-  console.log(userState)
 
   useEffect(()=>{
     gettingUser(inputUser)
@@ -44,7 +43,9 @@ const App = () => {
 
   return (
     <Container sx={containerStyles}>
-      <Searcher inputUser={inputUser} setInputUser={setInputUser} />
+      <Typography component="h1" variant='h4' color="white" >Github User Finder</Typography>
+      <Searcher inputUser={inputUser} setInputUser={setInputUser}/>
+      {notFound ? <Typography color="#d13c3c">Este usuario no existe</Typography> : ""}
       <UserCard userState={userState} />
     </Container>
   )

@@ -7,27 +7,27 @@ const UserCard = (props) => {
     const { userState } = props
     const { avatar_url } = userState
     return (
-        <Grid container spacing={2} sx={{marginTop: "15px"}}>
-            <Grid item xs={3} >
+        <Grid container justifyContent="center" width="100%" sx={{margin: "15px 0 0 0", backgroundColor: "#1e2a47", borderRadius: "15px", padding: "48px",}} >
+            <Grid item >
                 <CardMedia 
                     component="img" 
                     image={avatar_url} 
                     alt='Github User'
                     sx={{
                         borderRadius: "50%",
-                        marginLeft: "5px",
+                        height: "117px",
+                        width: "117px",
                     }} 
                 />
             </Grid>
-            <Grid item xs={9} >
-                <Stack direction="column" spacing={1} sx={{
-                    margin: "30px"
+            {/* <Grid item width="481px" > */}
+                <Stack container direction="column" spacing={1} sx={{
+                    margin: "10px 30px 30px"
                 }}>
                     <PrincipalInformation userState={userState} />
                     <Description userState={userState} />
                 </Stack>
-            </Grid>
-            
+            {/* </Grid>  */}
         </Grid>
   )
 }

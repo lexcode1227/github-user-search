@@ -1,8 +1,7 @@
 import React from 'react'
 import { Stack,Typography } from '@mui/material'
 
-const PrincipalInformation = (props) => {
-    const { userState } = props
+const PrincipalInformation = ({userState}) => {
     const { 
         name,
         login,
@@ -10,13 +9,11 @@ const PrincipalInformation = (props) => {
         } = userState
     return (
     <>
-        <Stack direction="row" sx={{
-            justifyContent: "space-between"
-        }} >
-            <Typography variant='h4' > {name} </Typography>
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography component='h2' variant='h5' > {name} </Typography>
             <Typography variant='subtitle2' > {created_at} </Typography>
         </Stack>
-        <Typography variant='caption' > {`@${login}`} </Typography>
+        <Typography component='h4' > {`@${login}`} </Typography>
     </>
   )
 }

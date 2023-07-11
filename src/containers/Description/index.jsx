@@ -3,14 +3,11 @@ import React from 'react'
 import PaperInformation from '../../components/PaperInformation'
 import LocationInformation from '../../components/LocationInformation'
 
-const Description = (props) => {
-    const { userState } = props
+const Description = ({ userState }) => {
     const { bio } = userState
     return (
     <>
-        <Stack sx={{
-            justifyContent: "center"
-        }}>
+        <Stack justifyContent="center">
             {bio !== null 
                 ?<Typography variant='body1'>{bio}</Typography>
                 :<Typography variant='body1'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque eaque id necessitatibus sequi voluptatem minus accusamus illo unde itaque voluptatibus voluptate temporibus molestiae. </Typography>    
