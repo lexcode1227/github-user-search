@@ -1,13 +1,27 @@
-import { CardMedia, Grid, Stack } from '@mui/material'
 import React from 'react'
+import { CardMedia, Grid, Stack, useTheme } from '@mui/material'
 import PrincipalInformation from '../../components/PrincipalInformation'
 import Description from '../Description'
 
 const UserCard = (props) => {
+    const theme = useTheme();
     const { userState } = props
     const { avatar_url } = userState
     return (
-        <Grid container justifyContent="center" width="100%" sx={{margin: "15px 0 0 0", backgroundColor: "#1e2a47", borderRadius: "15px", padding: "48px",}} >
+        <Grid
+            container
+            justifyContent="center"
+            width="100%"
+            sx={{
+                margin: "15px 0 0 0",
+                backgroundColor: "#1e2a47",
+                borderRadius: "15px",
+                padding: "48px",
+                [theme.breakpoints.down('sm')]: {
+                padding: "5px",
+                },
+            }}
+    >
             <Grid item >
                 <CardMedia 
                     component="img" 

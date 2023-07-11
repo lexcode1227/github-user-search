@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Stack, Typography } from '@mui/material'
+import { Grid, Stack, Typography, useTheme } from '@mui/material'
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkIcon from '@mui/icons-material/Link';
@@ -7,17 +7,18 @@ import BusinessIcon from '@mui/icons-material/Business';
 
 const LocationInformation = ({ userState }) => {
     const { location, twitter_username, blog, company  } = userState
+    const theme = useTheme();
     return (
-    <Grid container spacing={2} sx={{
-        marginTop: "15px"
-    }}>
-        <Grid item xs={6} >
+    <Grid container spacing={2} sx={{marginTop: "15px", [theme.breakpoints.down('sm')]: {
+        flexWrap: "nowrap", flexDirection: "column",
+        },}}>
+        <Grid item xs={6} maxWidth="100%" >
             <Stack direction="row" spacing={2}>
                 <LocationOnIcon/>
                 <Typography>{location}</Typography>
             </Stack>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6} maxWidth="100%" >
             <Stack direction="row" spacing={2}>
                 <TwitterIcon/>
                 {twitter_username === null
@@ -26,7 +27,7 @@ const LocationInformation = ({ userState }) => {
                 }
             </Stack>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6} maxWidth="100%" >
             <Stack direction="row" spacing={2}>
                 <LinkIcon/>
                 {blog !== null
@@ -36,7 +37,7 @@ const LocationInformation = ({ userState }) => {
                 }
             </Stack>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={6} maxWidth="100%" >
             <Stack direction="row" spacing={2}>
                 <BusinessIcon/>
                 {company !== null
